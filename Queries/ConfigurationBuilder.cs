@@ -7,6 +7,7 @@ using FluentNHibernate.Cfg;
 using FluentNHibernate.Cfg.Db;
 using NHibernate.Bytecode;
 using NHibernate.Cfg;
+using NHibernate.Context;
 
 namespace Queries
 {
@@ -25,6 +26,7 @@ namespace Queries
                                                                 .AdoNetBatchSize(100))
                                     .ProxyFactoryFactory<DefaultProxyFactoryFactory>()
                                     .Mappings(mappings => mappings.FluentMappings.AddFromAssemblyOf<ProductMapping>())
+                                    .CurrentSessionContext<ThreadStaticSessionContext>()
                                     .BuildConfiguration();
                 SaveConfigurationToFile(cfg);
             }
