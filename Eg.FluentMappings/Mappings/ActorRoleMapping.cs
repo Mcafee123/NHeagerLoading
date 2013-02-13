@@ -14,7 +14,7 @@ namespace Eg.FluentMappings.Mappings
         {
             Id(ar => ar.Id)
               .GeneratedBy.GuidComb();
-            Version(ar => ar.Version);
+            //Version(ar => ar.Version);
             Map(ar => ar.Actor)
               .Not.Nullable();
             Map(ar => ar.Role)

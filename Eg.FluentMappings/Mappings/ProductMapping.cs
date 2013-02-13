@@ -8,7 +8,7 @@ namespace Eg.FluentMappings.Mappings
         {
             Id(p => p.Id).GeneratedBy.GuidComb();
             DiscriminateSubClassesOnColumn("ProductType");
-            Version(p => p.Version);
+            //Version(p => p.Version);
             NaturalId()
               .Not.ReadOnly()
               .Property(p => p.Name);

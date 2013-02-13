@@ -9,7 +9,8 @@ namespace Eg.FluentMappings.Mappings
             Map(m => m.Director);
             HasMany(m => m.Actors)
               .KeyColumn("MovieId")
-              .AsList(l => l.Column("ActorIndex"));
+              .AsList(l => l.Column("ActorIndex"))
+              .Cascade.AllDeleteOrphan();
         }
     }
 }

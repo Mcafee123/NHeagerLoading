@@ -22,6 +22,9 @@ namespace ConfigByFNH
 
             var sessionFactory = nhConfig.BuildSessionFactory();
             Console.WriteLine("NHibernate configured fluently");
+
+
+
             Console.ReadKey();
         }
     }
