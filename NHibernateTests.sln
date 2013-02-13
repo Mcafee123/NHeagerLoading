@@ -9,6 +9,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Eg.FluentMappings", "Eg.Flu
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConfigByAppConfig", "ConfigByAppConfig\ConfigByAppConfig.csproj", "{67FA83B7-B87E-4837-A395-623EB661C095}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConfigByCode", "ConfigByCode\ConfigByCode.csproj", "{FE0CCF1A-D694-4F73-AA9C-7264512161DB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConfigByFNH", "ConfigByFNH\ConfigByFNH.csproj", "{09081CBF-F8BB-4DC9-9467-4F3E028ADCD7}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -31,6 +35,14 @@ Global
 		{67FA83B7-B87E-4837-A395-623EB661C095}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{67FA83B7-B87E-4837-A395-623EB661C095}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{67FA83B7-B87E-4837-A395-623EB661C095}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FE0CCF1A-D694-4F73-AA9C-7264512161DB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FE0CCF1A-D694-4F73-AA9C-7264512161DB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FE0CCF1A-D694-4F73-AA9C-7264512161DB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FE0CCF1A-D694-4F73-AA9C-7264512161DB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{09081CBF-F8BB-4DC9-9467-4F3E028ADCD7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{09081CBF-F8BB-4DC9-9467-4F3E028ADCD7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{09081CBF-F8BB-4DC9-9467-4F3E028ADCD7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{09081CBF-F8BB-4DC9-9467-4F3E028ADCD7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
