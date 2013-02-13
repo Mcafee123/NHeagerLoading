@@ -10,6 +10,8 @@ namespace ConfigByFNH
     {
         static void Main(string[] args)
         {
+            HibernatingRhinos.Profiler.Appender.NHibernate.NHibernateProfiler.Initialize();
+
             var nhConfig = Fluently.Configure()
                                    .Database(MsSqlConfiguration.MsSql2008.ConnectionString(
                                        connstr => connstr.FromConnectionStringWithKey("db"))
