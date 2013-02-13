@@ -7,6 +7,7 @@ namespace ConfigByAppConfig
     {
         static void Main(string[] args)
         {
+            log4net.Config.XmlConfigurator.Configure();
             var nhConfig = new Configuration().Configure();
             var sessionFactory = nhConfig.BuildSessionFactory();
             Console.WriteLine("NHibernate Configured!");
