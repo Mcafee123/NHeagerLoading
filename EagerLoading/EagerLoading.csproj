@@ -54,10 +54,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="MappingCfg.cs" />
-    <Compile Include="Mappings\NHBewilligungMap.cs">
+    <Compile Include="Mappings\BewilligungMap.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Mappings\NHDossierMap.cs">
+    <Compile Include="Mappings\DossierMap.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="NHIdBase.cs" />
