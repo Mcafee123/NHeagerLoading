@@ -13,7 +13,7 @@ namespace EagerLoading.Mappings
         public DossierMap()
         {
             Id(x => x.Id);
-            HasMany<Bewilligung>(x => x.Bewilligungen);
+            HasMany<Bewilligung>(x => x.Bewilligungen).KeyColumn("Dossier_id");
         }
     }
 }

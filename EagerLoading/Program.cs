@@ -21,7 +21,6 @@ namespace EagerLoading
     {
         static void Main(string[] args)
         {
-            NHibernateProfiler.Initialize();
             var mappingConfig = new MappingCfg();
             var autoMappings = AutoMap.AssemblyOf<Dossier>(mappingConfig);
             //autoMappings.UseOverridesFromAssemblyOf<NHDossier>();
@@ -77,6 +76,8 @@ namespace EagerLoading
             }
             Console.WriteLine("Testdata inserted");
 
+            NHibernateProfiler.Initialize();
+
             Console.WriteLine(".");
             Console.WriteLine(".");
             Console.WriteLine(".");
@@ -86,12 +87,15 @@ namespace EagerLoading
             Console.WriteLine(".");
             Console.WriteLine(".");
             Console.WriteLine(".");
-            LoadWithJoinAlias(sessionFactory, nhDossier);
+            LoadWithFetch(sessionFactory, nhDossier);
             Console.WriteLine(".");
             Console.WriteLine(".");
             Console.WriteLine(".");
             Console.WriteLine(".");
-            Console.WriteLine("TestQuery has run");
+            LoadWithFuture(sessionFactory, nhDossier);
+            Console.WriteLine(".");
+            Console.WriteLine(".");
+            Console.WriteLine("TestQueries executed");
 
             Console.ReadKey();
         }
@@ -110,8 +114,9 @@ namespace EagerLoading
 
                     // get dossier with person
                     var query = session.QueryOver<Dossier>(() => dossierAlias)
-                                       .JoinAlias(() => dossierAlias.Bewilligungen, () => bewilligungAlias, JoinType.InnerJoin)
-                                       .Where(d => dossierAlias.Id == nhDossier.Id);
+                                       .JoinAlias(() => dossierAlias.Bewilligungen, () => bewilligungAlias)
+                                       .Where(d => dossierAlias.Id == nhDossier.Id)
+                                       .TransformUsing(Transformers.DistinctRootEntity);
 
                     tx.Commit();
                     list = query.List<Dossier>();
@@ -181,14 +186,17 @@ namespace EagerLoading
                     // compose query
                     // get dossier with person
                     var dossier = session.QueryOver<Dossier>()
-                                       .Where(d => d.Id == nhDossier.Id);
+                                       .Where(d => d.Id == nhDossier.Id)
+                                       .Future<Dossier>();
 
-                    var bew = session.QueryOver<Bewilligung>()
-                                        .Where(b => b.Dossier.Id == nhDossier.Id)
-                                        .Future<Bewilligung>();
+                    //var bew = session.QueryOver<Bewilligung>()
+                    //                    .Where(b => b.Dossier.Id == nhDossier.Id)
+                    //                    .Future<Bewilligung>();
+
+                    NHibernateUtil.Initialize(dossier.FirstOrDefault().Bewilligungen);
 
                     tx.Commit();
-                    list = dossier.Future<Dossier>().ToList();
+                    list = dossier.ToList();
                 }
             }
 
