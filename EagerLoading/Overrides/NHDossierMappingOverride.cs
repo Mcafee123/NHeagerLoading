@@ -9,7 +9,7 @@ namespace itree.gef.ddb.Infrastructure.Overrides
         public override void Override(AutoMapping<NHDossier> mapping)
         {
             //AddMany(mapping, d => d.Notizen).Cascade.AllDeleteOrphan();
-            AddMany(mapping, d => d.Bewilligungen).Cascade.AllDeleteOrphan();
+            AddMany(mapping, d => d.Bewilligungen).Inverse();
 
             //AddRef(mapping, d => d.Patient);
         }

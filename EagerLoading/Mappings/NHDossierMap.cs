@@ -15,7 +15,6 @@ namespace EagerLoading.Mappings
             Id(x => x.Id);
             HasMany<NHBewilligung>(x => x.Bewilligungen)
               .KeyColumn("BewDosId")
-              .AsList()
               .ForeignKeyConstraintName("FK_Bewilligung_Dossier")
               .Inverse();
         }

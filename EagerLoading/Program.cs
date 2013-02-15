@@ -27,19 +27,16 @@ namespace EagerLoading
             var autoMappings = AutoMap.AssemblyOf<NHDossier>(mappingConfig);
             autoMappings.UseOverridesFromAssemblyOf<NHDossier>();
 
-            //var fluentMappings = 
-
             // debug out mappings
             var path = new DirectoryInfo(Path.Combine(Environment.CurrentDirectory, @"..\..\GeneratedMappings"));
-            autoMappings.WriteMappingsTo(path.FullName);
 
             var nhConfig = Fluently.Configure()
                                    .Database(MsSqlConfiguration.MsSql2008.ConnectionString(
                                        connstr => connstr.FromConnectionStringWithKey("db"))
                                                                .AdoNetBatchSize(100))
                                    .ProxyFactoryFactory<DefaultProxyFactoryFactory>()
-                                   .Mappings(m => m.AutoMappings.Add(autoMappings))
-                                   //.Mappings(m => m.FluentMappings.Add()FromAssemblyOf<NHDossierMap>())
+                                   .Mappings(m => m.AutoMappings.Add(autoMappings).ExportTo(path.FullName))
+                                   //.Mappings(m => m.FluentMappings.AddFromAssemblyOf<NHDossierMap>().ExportTo(path.FullName))
                                    .BuildConfiguration();
 
             var sessionFactory = nhConfig.BuildSessionFactory();

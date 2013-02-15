@@ -10,7 +10,7 @@ namespace EagerLoading
     {
     }
 
-    public abstract class NHIdBase<TId> : NHMutation
+    public abstract class NHIdBase<TId>
     {
         public virtual TId Id { get; set; }
         public override bool Equals(object obj)

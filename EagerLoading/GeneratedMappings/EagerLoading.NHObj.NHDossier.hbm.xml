@@ -4,23 +4,11 @@
       <column name="Id" />
       <generator class="guid.comb" />
     </id>
-    <bag cascade="all-delete-orphan" name="Bewilligungen">
+    <bag inverse="true" name="Bewilligungen">
       <key foreign-key="FK_Bewilligung_Dossier">
         <column name="BewDosId" />
       </key>
       <one-to-many class="EagerLoading.NHObj.NHBewilligung, EagerLoading, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" />
     </bag>
-    <property name="ErfasstDatum" type="System.DateTime, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-      <column name="ErfasstDatum" />
-    </property>
-    <property name="ErfasstBenutzer" type="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-      <column name="ErfasstBenutzer" />
-    </property>
-    <property name="MutationDatum" type="System.Nullable`1[[System.DateTime, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-      <column name="MutationDatum" />
-    </property>
-    <property name="MutationBenutzer" type="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-      <column name="MutationBenutzer" />
-    </property>
   </class>
 </hibernate-mapping>
