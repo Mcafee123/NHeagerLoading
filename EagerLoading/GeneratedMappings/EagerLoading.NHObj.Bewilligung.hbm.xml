@@ -1,5 +1,5 @@
 <hibernate-mapping xmlns="urn:nhibernate-mapping-2.2">
-  <class xmlns="urn:nhibernate-mapping-2.2" name="EagerLoading.NHObj.NHBewilligung, EagerLoading, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" table="`NHBewilligung`">
+  <class xmlns="urn:nhibernate-mapping-2.2" name="EagerLoading.NHObj.Bewilligung, EagerLoading, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" table="`Bewilligung`">
     <id name="Id" type="System.Guid, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
       <column name="Id" />
       <generator class="guid.comb" />
@@ -16,7 +16,7 @@
     <property name="GrdZusatz" type="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
       <column name="GrdZusatz" />
     </property>
-    <many-to-one class="EagerLoading.NHObj.NHDossier, EagerLoading, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" name="Dossier">
+    <many-to-one class="EagerLoading.NHObj.Dossier, EagerLoading, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" name="Dossier">
       <column name="Dossier_id" />
     </many-to-one>
   </class>

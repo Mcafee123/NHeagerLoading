@@ -54,17 +54,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="MappingCfg.cs" />
-    <Compile Include="Mappings\NHBewilligungMap.cs" />
-    <Compile Include="Mappings\NHDossierMap.cs" />
     <Compile Include="NHIdBase.cs" />
     <Compile Include="NHMutation.cs" />
     <Compile Include="NHObj\NHBewilligung.cs" />
     <Compile Include="NHObj\NHDossier.cs" />
-    <Compile Include="Overrides\ConventionBase.cs" />
-    <Compile Include="Overrides\NHBewilligungMappingOverride.cs" />
-    <Compile Include="Overrides\NHDossierMappingOverride.cs" />
-    <Compile Include="Overrides\NHOverrideBase.cs" />
-    <Compile Include="Overrides\TableNameConvention.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -74,6 +67,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="GeneratedMappings\" />
+    <Folder Include="Mappings\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

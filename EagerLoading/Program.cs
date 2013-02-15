@@ -1,4 +1,4 @@
-﻿using EagerLoading.Mappings;
+﻿//using EagerLoading.Mappings;
 using EagerLoading.NHObj;
 using FluentNHibernate.Automapping;
 using FluentNHibernate.Cfg;
@@ -24,8 +24,8 @@ namespace EagerLoading
         {
             NHibernateProfiler.Initialize();
             var mappingConfig = new MappingCfg();
-            var autoMappings = AutoMap.AssemblyOf<NHDossier>(mappingConfig);
-            autoMappings.UseOverridesFromAssemblyOf<NHDossier>();
+            var autoMappings = AutoMap.AssemblyOf<Dossier>(mappingConfig);
+            //autoMappings.UseOverridesFromAssemblyOf<NHDossier>();
 
             // debug out mappings
             var path = new DirectoryInfo(Path.Combine(Environment.CurrentDirectory, @"..\..\GeneratedMappings"));
@@ -46,9 +46,9 @@ namespace EagerLoading
             schemaExport.Execute(true, true, false);
             Console.WriteLine("DB created");
 
-            var nhDossier = new NHDossier();
+            var nhDossier = new Dossier();
 
-            var Erstbewilligung = new NHBewilligung
+            var Erstbewilligung = new Bewilligung
             {
                 Start = new DateTime(2012, 2, 1),
                 Ende = new DateTime(2013, 1, 31),
@@ -56,7 +56,7 @@ namespace EagerLoading
                 Dossier = nhDossier
             };
 
-            var MediWechsel = new NHBewilligung
+            var MediWechsel = new Bewilligung
             {
                 Start = new DateTime(2012, 6, 5),
                 Dossier = nhDossier,
@@ -78,32 +78,44 @@ namespace EagerLoading
             }
             Console.WriteLine("Testdata inserted");
 
+            Console.WriteLine(".");
+            Console.WriteLine(".");
+            Console.WriteLine(".");
+            Console.WriteLine(".");
             LoadWithJoinAlias(sessionFactory, nhDossier);
-
+            Console.WriteLine(".");
+            Console.WriteLine(".");
+            Console.WriteLine(".");
+            Console.WriteLine(".");
+            LoadWithJoinAlias(sessionFactory, nhDossier);
+            Console.WriteLine(".");
+            Console.WriteLine(".");
+            Console.WriteLine(".");
+            Console.WriteLine(".");
             Console.WriteLine("TestQuery has run");
 
             Console.ReadKey();
         }
 
-        private static void LoadWithJoinAlias(ISessionFactory sessionFactory, NHDossier nhDossier)
+        private static void LoadWithJoinAlias(ISessionFactory sessionFactory, Dossier nhDossier)
         {
-            IList<NHDossier> list;
+            IList<Dossier> list;
             using (var session = sessionFactory.OpenSession())
             {
                 using (var tx = session.BeginTransaction())
                 {
                     // compose query
                     // aliases
-                    NHDossier dossierAlias = null;
-                    NHBewilligung bewilligungAlias = null;
+                    Dossier dossierAlias = null;
+                    Bewilligung bewilligungAlias = null;
 
                     // get dossier with person
-                    var query = session.QueryOver<NHDossier>(() => dossierAlias)
+                    var query = session.QueryOver<Dossier>(() => dossierAlias)
                                        .JoinAlias(() => dossierAlias.Bewilligungen, () => bewilligungAlias, JoinType.InnerJoin)
                                        .Where(d => dossierAlias.Id == nhDossier.Id);
 
                     tx.Commit();
-                    list = query.List<NHDossier>();
+                    list = query.List<Dossier>();
                  }
             }
 
@@ -124,22 +136,22 @@ namespace EagerLoading
             }
         }
 
-        private static void LoadWithFetch(ISessionFactory sessionFactory, NHDossier nhDossier)
+        private static void LoadWithFetch(ISessionFactory sessionFactory, Dossier nhDossier)
         {
-            IList<NHDossier> list;
+            IList<Dossier> list;
             using (var session = sessionFactory.OpenSession())
             {
                 using (var tx = session.BeginTransaction())
                 {
                     // compose query
                     // get dossier with person
-                    var query = session.QueryOver<NHDossier>()
+                    var query = session.QueryOver<Dossier>()
                                        .Where(d => d.Id == nhDossier.Id)
                                        .Fetch(d => d.Bewilligungen).Eager
                                        .TransformUsing(Transformers.DistinctRootEntity);
 
                     tx.Commit();
-                    list = query.List<NHDossier>();
+                    list = query.List<Dossier>();
                 }
             }
 
@@ -160,24 +172,24 @@ namespace EagerLoading
             }
         }
 
-        private static void LoadWithFuture(ISessionFactory sessionFactory, NHDossier nhDossier)
+        private static void LoadWithFuture(ISessionFactory sessionFactory, Dossier nhDossier)
         {
-            IList<NHDossier> list;
+            IList<Dossier> list;
             using (var session = sessionFactory.OpenSession())
             {
                 using (var tx = session.BeginTransaction())
                 {
                     // compose query
                     // get dossier with person
-                    var dossier = session.QueryOver<NHDossier>()
+                    var dossier = session.QueryOver<Dossier>()
                                        .Where(d => d.Id == nhDossier.Id);
 
-                    var bew = session.QueryOver<NHBewilligung>()
+                    var bew = session.QueryOver<Bewilligung>()
                                         .Where(b => b.Dossier.Id == nhDossier.Id)
-                                        .Future<NHBewilligung>();
+                                        .Future<Bewilligung>();
 
                     tx.Commit();
-                    list = dossier.Future<NHDossier>().ToList();
+                    list = dossier.Future<Dossier>().ToList();
                 }
             }
 

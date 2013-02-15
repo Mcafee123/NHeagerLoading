@@ -17,7 +17,7 @@ namespace EagerLoading.Mappings
             Map(x => x.Start);
             Map(x => x.Ende);
             Map(x => x.GrdZusatz);
-            References<NHDossier>(x => x.Dossier).Column("BewDosId").ForeignKey("FK_Bewilligung_Dossier");
+            References<NHDossier>(x => x.Dossier).Column("DosId").ForeignKey("BewDosId");
         }
     }
 }

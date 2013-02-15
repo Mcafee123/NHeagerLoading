@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace EagerLoading.NHObj
 {
-    public class NHBewilligung : NHIdBase
+    public class Bewilligung : NHIdBase
     {
-        public NHBewilligung()
+        public Bewilligung()
         {
             // ReSharper disable DoNotCallOverridableMethodsInConstructor
             //Zusatzbewilligungen = new HashedSet<NHBewilligung>();
@@ -17,7 +17,7 @@ namespace EagerLoading.NHObj
 
         //public virtual NHBewilligung Grundbewilligung { get; set; }
         //public virtual ISet<NHBewilligung> Zusatzbewilligungen { get; set; }
-        public virtual NHDossier Dossier { get; set; }
+        public virtual Dossier Dossier { get; set; }
         public virtual string Bemerkung { get; set; }
         public virtual DateTime Start { get; set; }
         public virtual DateTime? Ende { get; set; }

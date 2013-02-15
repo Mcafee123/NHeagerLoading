@@ -7,15 +7,15 @@ using System.Threading.Tasks;
 
 namespace EagerLoading.NHObj
 {
-    public class NHDossier : NHIdBase
+    public class Dossier : NHIdBase
     {
-        public NHDossier()
+        public Dossier()
         {
 
             // ReSharper disable DoNotCallOverridableMethodsInConstructor
-            Bewilligungen = new List<NHBewilligung>();
+            Bewilligungen = new List<Bewilligung>();
             // ReSharper restore DoNotCallOverridableMethodsInConstructor
         }
-        public virtual IList<NHBewilligung> Bewilligungen { get; set; }
+        public virtual IList<Bewilligung> Bewilligungen { get; set; }
     }
 }
