@@ -5,7 +5,7 @@ using NHibernate.Context;
 
 namespace Eg.Core.Data
 {
-    public class DataAccessObject<T, TId> where T: Entity<TId>
+    public class DataAccessObject<T, TId> where T : Entity<TId>
     {
         private readonly ISessionFactory _sessionFactory;
 
@@ -16,13 +16,13 @@ namespace Eg.Core.Data
 
         protected ISession Session
         {
-        get
+            get
             {
                 if (!CurrentSessionContext.HasBind(_sessionFactory))
                 {
                     CurrentSessionContext.Bind(_sessionFactory.OpenSession());
                 }
-                return _sessionFactory.GetCurrentSession();    
+                return _sessionFactory.GetCurrentSession();
             }
         }
 
@@ -52,7 +52,7 @@ namespace Eg.Core.Data
             {
                 // Wrap in transaction
                 TResult result;
-                using (var tx = Session.BeginTransaction())
+                using (ITransaction tx = Session.BeginTransaction())
                 {
                     result = func.Invoke();
                     tx.Commit();
@@ -67,17 +67,16 @@ namespace Eg.Core.Data
         private void Transact(Action action)
         {
             Transact(() =>
-            {
-                action.Invoke();
-                return false;
-            });
+                {
+                    action.Invoke();
+                    return false;
+                });
         }
-
     }
 
     public class DataAccessObject<T>
-      : DataAccessObject<T, Guid>
-      where T : Entity
+        : DataAccessObject<T, Guid>
+        where T : Entity
     {
         public DataAccessObject(ISessionFactory sessionFactory) : base(sessionFactory)
         {
