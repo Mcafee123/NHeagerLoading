@@ -192,34 +192,32 @@ namespace EagerLoading
 
                     // get dossier with person
                     var dossier = session.QueryOver<Dossier>(() => dossierAlias)
-                                       .Where(d => d.Id == dossierId);
+                                        .Where(d => d.Id == dossierId)
+                                        .Future<Dossier>();
 
-
-                    dossier.Future<Dossier>();
-
-                    session.QueryOver<Bewilligung>()
+                    var bew = session.QueryOver<Bewilligung>()
                             .JoinAlias(b => b.Dossier, () => dossierAlias)
                             .Where(() => dossierAlias.Id == dossierId)
                             .Future<Bewilligung>();
 
-                    tx.Commit();
+                    //tx.Commit();
+                    //bew.GetEnumerator().MoveNext();
+                    list = dossier.ToList();
 
-                    list = dossier.List();
-                    doss = list.FirstOrDefault();
-                    
+                    doss = dossierAlias;                    
                 }
             }
 
             try
             {
-                foreach (var d in list)
-                {
-                    Console.WriteLine(d.Id);
-                    foreach (var b in d.Bewilligungen)
-                    {
-                        Console.WriteLine(b.Bemerkung);
-                    }
-                }
+                //foreach (var d in list)
+                //{
+                //    Console.WriteLine(d.Id);
+                //    foreach (var b in d.Bewilligungen)
+                //    {
+                //        Console.WriteLine(b.Bemerkung);
+                //    }
+                //}
 
                 Console.WriteLine("second:");
                 foreach (var b in doss.Bewilligungen)
