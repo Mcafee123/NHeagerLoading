@@ -10,6 +10,7 @@ using NHibernate.Tool.hbm2ddl;
 using NHibernate.Transform;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -31,7 +32,8 @@ namespace EagerLoading
             var nhConfig = Fluently.Configure()
                                    .Database(MsSqlConfiguration.MsSql2008.ConnectionString(
                                        connstr => connstr.FromConnectionStringWithKey("db"))
-                                                               .AdoNetBatchSize(100))
+                                                               .AdoNetBatchSize(100)
+                                                               .IsolationLevel(IsolationLevel.ReadCommitted))
                                    .ProxyFactoryFactory<DefaultProxyFactoryFactory>()
                                    .Mappings(m => m.AutoMappings.Add(autoMappings).ExportTo(path.FullName))
                                    //.Mappings(m => m.FluentMappings.AddFromAssemblyOf<EagerLoading.Mappings.DossierMap>().ExportTo(path.FullName))
@@ -187,24 +189,23 @@ namespace EagerLoading
                     // dossier id
                     var dossierId = nhDossier.Id;
                     // compose query
-                    IList<Bewilligung> bewilligungAlias = null;
-                    Dossier dossierAlias = null;
+                    //IList<Bewilligung> bewilligungAlias = null;
+                    //Dossier dossierAlias = null;
 
                     // get dossier with person
-                    var dossier = session.QueryOver<Dossier>(() => dossierAlias)
-                                        .Where(d => d.Id == dossierId)
-                                        .Future<Dossier>();
+                    var dossier = session.QueryOver<Dossier>()
+                                    .Where(d => d.Id == dossierId)
+                                    .Future();
 
                     var bew = session.QueryOver<Bewilligung>()
-                            .JoinAlias(b => b.Dossier, () => dossierAlias)
-                            .Where(() => dossierAlias.Id == dossierId)
-                            .Future<Bewilligung>();
+                                    .Where(d => d.Dossier.Id == dossierId)
+                                    .Future();
 
-                    //tx.Commit();
+                    
                     //bew.GetEnumerator().MoveNext();
-                    list = dossier.ToList();
-
-                    doss = dossierAlias;                    
+                    doss = dossier.FirstOrDefault();
+                    //doss.Bewilligungen.GetEnumerator().MoveNext();
+                    tx.Commit();
                 }
             }
 

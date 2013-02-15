@@ -60,10 +60,8 @@
     <Compile Include="Mappings\DossierMap.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="NHIdBase.cs" />
-    <Compile Include="NHMutation.cs" />
-    <Compile Include="NHObj\NHBewilligung.cs" />
-    <Compile Include="NHObj\NHDossier.cs" />
+    <Compile Include="NHObj\Bewilligung.cs" />
+    <Compile Include="NHObj\Dossier.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
