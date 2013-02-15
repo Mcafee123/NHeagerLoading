@@ -54,6 +54,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="MappingCfg.cs" />
+    <Compile Include="Mappings\NHBewilligungMap.cs" />
+    <Compile Include="Mappings\NHDossierMap.cs" />
     <Compile Include="NHIdBase.cs" />
     <Compile Include="NHMutation.cs" />
     <Compile Include="NHObj\NHBewilligung.cs" />
@@ -70,7 +72,9 @@
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="GeneratedMappings\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

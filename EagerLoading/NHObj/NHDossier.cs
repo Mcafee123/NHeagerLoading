@@ -1,5 +1,6 @@
 ﻿using Iesi.Collections.Generic;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,9 +13,9 @@ namespace EagerLoading.NHObj
         {
 
             // ReSharper disable DoNotCallOverridableMethodsInConstructor
-            Bewilligungen = new HashedSet<NHBewilligung>();
+            Bewilligungen = new List<NHBewilligung>();
             // ReSharper restore DoNotCallOverridableMethodsInConstructor
         }
-        public virtual ISet<NHBewilligung> Bewilligungen { get; set; }
+        public virtual IList<NHBewilligung> Bewilligungen { get; set; }
     }
 }

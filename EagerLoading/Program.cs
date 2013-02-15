@@ -1,4 +1,5 @@
-﻿using EagerLoading.NHObj;
+﻿using EagerLoading.Mappings;
+using EagerLoading.NHObj;
 using FluentNHibernate.Automapping;
 using FluentNHibernate.Cfg;
 using FluentNHibernate.Cfg.Db;
@@ -10,6 +11,7 @@ using NHibernate.Tool.hbm2ddl;
 using NHibernate.Transform;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -22,15 +24,22 @@ namespace EagerLoading
         {
             NHibernateProfiler.Initialize();
             var mappingConfig = new MappingCfg();
-            var mappings = AutoMap.AssemblyOf<NHDossier>(mappingConfig);
-            mappings.UseOverridesFromAssemblyOf<NHDossier>();
+            var autoMappings = AutoMap.AssemblyOf<NHDossier>(mappingConfig);
+            autoMappings.UseOverridesFromAssemblyOf<NHDossier>();
+
+            //var fluentMappings = 
+
+            // debug out mappings
+            var path = new DirectoryInfo(Path.Combine(Environment.CurrentDirectory, @"..\..\GeneratedMappings"));
+            autoMappings.WriteMappingsTo(path.FullName);
 
             var nhConfig = Fluently.Configure()
                                    .Database(MsSqlConfiguration.MsSql2008.ConnectionString(
                                        connstr => connstr.FromConnectionStringWithKey("db"))
                                                                .AdoNetBatchSize(100))
                                    .ProxyFactoryFactory<DefaultProxyFactoryFactory>()
-                                   .Mappings(m => m.AutoMappings.Add(mappings))
+                                   .Mappings(m => m.AutoMappings.Add(autoMappings))
+                                   //.Mappings(m => m.FluentMappings.Add()FromAssemblyOf<NHDossierMap>())
                                    .BuildConfiguration();
 
             var sessionFactory = nhConfig.BuildSessionFactory();
@@ -72,7 +81,7 @@ namespace EagerLoading
             }
             Console.WriteLine("Testdata inserted");
 
-            LoadWithFuture(sessionFactory, nhDossier);
+            LoadWithJoinAlias(sessionFactory, nhDossier);
 
             Console.WriteLine("TestQuery has run");
 

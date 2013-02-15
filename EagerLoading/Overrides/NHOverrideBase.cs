@@ -18,7 +18,7 @@ namespace itree.gef.ddb.Infrastructure.Overrides
             // get key-column name
             var colName = GetColumnName(typeof (TChild), typeof (T));
             // get key name
-            var keyName = GetKeyName(typeof(T), typeof(TChild));
+            var keyName = GetKeyName(typeof(TChild), typeof(T));
             return mapping.HasMany(reference).KeyColumn(colName).ForeignKeyConstraintName(keyName);
         }
 
