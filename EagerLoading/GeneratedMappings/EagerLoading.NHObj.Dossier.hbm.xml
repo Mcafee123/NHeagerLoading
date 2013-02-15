@@ -4,7 +4,7 @@
       <column name="Id" />
       <generator class="guid.comb" />
     </id>
-    <bag name="Bewilligungen">
+    <bag inverse="true" name="Bewilligungen">
       <key>
         <column name="Dossier_id" />
       </key>

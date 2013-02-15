@@ -1,5 +1,4 @@
-﻿//using EagerLoading.Mappings;
-using EagerLoading.NHObj;
+﻿using EagerLoading.NHObj;
 using FluentNHibernate.Automapping;
 using FluentNHibernate.Cfg;
 using FluentNHibernate.Cfg.Db;
@@ -35,8 +34,8 @@ namespace EagerLoading
                                        connstr => connstr.FromConnectionStringWithKey("db"))
                                                                .AdoNetBatchSize(100))
                                    .ProxyFactoryFactory<DefaultProxyFactoryFactory>()
-                                   .Mappings(m => m.AutoMappings.Add(autoMappings).ExportTo(path.FullName))
-                                   //.Mappings(m => m.FluentMappings.AddFromAssemblyOf<NHDossierMap>().ExportTo(path.FullName))
+                                   //.Mappings(m => m.AutoMappings.Add(autoMappings).ExportTo(path.FullName))
+                                   .Mappings(m => m.FluentMappings.AddFromAssemblyOf<EagerLoading.Mappings.DossierMap>().ExportTo(path.FullName))
                                    .BuildConfiguration();
 
             var sessionFactory = nhConfig.BuildSessionFactory();

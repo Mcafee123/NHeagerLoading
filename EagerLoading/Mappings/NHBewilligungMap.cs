@@ -8,16 +8,16 @@ using System.Threading.Tasks;
 
 namespace EagerLoading.Mappings
 {
-    public class NHBewilligungMap: ClassMap<NHBewilligung>
+    public class BewilligungMap: ClassMap<Bewilligung>
     {
-        public NHBewilligungMap()
+        public BewilligungMap()
         {
             Id(x => x.Id);
             Map(x => x.Bemerkung);
             Map(x => x.Start);
             Map(x => x.Ende);
             Map(x => x.GrdZusatz);
-            References<NHDossier>(x => x.Dossier).Column("DosId").ForeignKey("BewDosId");
+            References<Dossier>(x => x.Dossier);
         }
     }
 }

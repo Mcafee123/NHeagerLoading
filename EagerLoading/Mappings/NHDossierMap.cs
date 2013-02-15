@@ -8,15 +8,12 @@ using System.Threading.Tasks;
 
 namespace EagerLoading.Mappings
 {
-    public class NHDossierMap: ClassMap<NHDossier>
+    public class DossierMap: ClassMap<Dossier>
     {
-        public NHDossierMap()
+        public DossierMap()
         {
             Id(x => x.Id);
-            HasMany<NHBewilligung>(x => x.Bewilligungen)
-              .KeyColumn("BewDosId")
-              .ForeignKeyConstraintName("FK_Bewilligung_Dossier")
-              .Inverse();
+            HasMany<Bewilligung>(x => x.Bewilligungen);
         }
     }
 }
