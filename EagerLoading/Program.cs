@@ -13,15 +13,14 @@ using System.Collections.Generic;
 using System.Data;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace EagerLoading
 {
     class Program
     {
         static void Main(string[] args)
-        {
+        {App_Start.NHibernateProfilerBootstrapper.PreStart();
+
             var mappingConfig = new MappingCfg();
             var autoMappings = AutoMap.AssemblyOf<Dossier>(mappingConfig);
             //autoMappings.UseOverridesFromAssemblyOf<NHDossier>();
@@ -233,3 +232,4 @@ namespace EagerLoading
         }
     }
 }
+
